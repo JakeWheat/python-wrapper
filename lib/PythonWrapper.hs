@@ -13,7 +13,7 @@ figure out how to refactor the pyFor code
 {-# LANGUAGE TupleSections #-}
 {-# LANGUAGE MultiWayIf #-}
 {-# LANGUAGE PartialTypeSignatures #-}
-module PyWrap
+module PythonWrapper
     (initialize
 
     -- main api
@@ -220,8 +220,8 @@ _splitStatements src =
 
 data PythonError
     = PythonError
-    {peName :: Text
-    ,peMessage :: Text}
+    {peName :: !Text
+    ,peMessage :: !Text}
     deriving (Eq,Show)
 
 type PyWrap = ExceptT PythonError IO
@@ -355,7 +355,7 @@ data CPyObject = CPyObject
     deriving Show
 
 -- haskell wrapper
-data PyObject = PyObject (ForeignPtr CPyObject)
+data PyObject = PyObject !(ForeignPtr CPyObject)
     deriving Show
 
 touchPyObject :: PyObject -> IO ()

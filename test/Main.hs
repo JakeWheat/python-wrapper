@@ -10,7 +10,7 @@ import qualified Test.Tasty.HUnit as H
 import qualified Data.Text as T
 import qualified Text.RawString.QQ as R
 
-import qualified PyWrap as Py
+import qualified PythonWrapper as Py
 --import Control.Concurrent.Async (withAsyncBound, wait)
 --import Control.Concurrent (rtsSupportsBoundThreads)
 
@@ -42,7 +42,7 @@ main = do
 tests :: IO H.TestTree
 tests = do
     Py.initialize
-    pure $ H.testGroup "pywraptests"
+    pure $ H.testGroup "python-wrapper-tests"
         [bootStrapSyntaxFns
         ,evalTests
         ]

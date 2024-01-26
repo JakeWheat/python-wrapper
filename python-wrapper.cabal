@@ -1,5 +1,5 @@
 cabal-version:      3.0
-name:               pywrap
+name:               python-wrapper
 version:            0.1
 -- synopsis:
 -- description:
@@ -18,31 +18,25 @@ common common
 
 library
     import:            common
-    exposed-modules:   PyWrap
-    build-depends:     base ^>=4.19.0.0,
+    exposed-modules:   PythonWrapper
+    build-depends:     base >=4.17.0.0 && < 5,
                        text,
                        raw-strings-qq,
                        async,
                        mtl,
                        safe-exceptions,
-
-    -- other-modules:
-    -- other-extensions:
     hs-source-dirs:    lib
-    pkgconfig-depends: python3
-    -- todo: how to find the local python3 version instead of hardcoding it
-    extra-libraries:   python3.11
-    C-sources:         pywrap-c.c
+    pkgconfig-depends: python3,
+                       python3-embed
+    C-sources:         python-wrapper-c.c
 
-test-suite pywrap-test
+test-suite python-wrapper-test
     import:            common
-    -- other-modules:
-    -- other-extensions:
     type:              exitcode-stdio-1.0
     hs-source-dirs:    test
     main-is:           Main.hs
-    build-depends:     base ^>=4.19.0.0,
-                       pywrap,
+    build-depends:     base >=4.17.0.0 && < 5,
+                       python-wrapper,
                        tasty,
                        tasty-hunit,
                        text,
